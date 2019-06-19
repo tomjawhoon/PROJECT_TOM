@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>TEST LOGIN</title>
+            <!-- <script src = "app.js"></script> -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/esm/popper-utils.min.js.map"></script>
+            <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.css"></script> -->
+            <!-- <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css"> -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+            <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <!-- <script src="https://use.fontawesome.com/releases/v5.8.2/js/all.css"></script> -->
+            <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>  -->
+                        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+                  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>       
+                        <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script> --> 
+            <!-- <script src = "Registor.html"></script> -->
+        </head>
+        <body>
+       
+        <div class="model-dialog text-center">
+            <center><div class="col-sm-8 main-section">
+                <div class="model-content">
+
+                    <div class="col-6 user-img">
+                        <img src="img/face.png">
+                    </div>
+                    <h3>sign in</h3>
+                    <br>
+
+                    <form class="col-6">
+                        <label for='emailLogin' ></label>
+                        <div class="form-group">
+                            <input type="text"      id="emailLogin"    class="form-control" placeholder="Enter Username">
+                        </div>
+                        <label for='passwordLogin' ></label>
+                        <div class="form-group">
+                            <input type="password"  id="passwordLogin" class="form-control" placeholder="Enter password">
+                        </div>
+                        <button type="button"  onclick="signIn()" class="btn btn-success"><i class="fas fa-sign-in-alt"></i>Login</button>
+                    
+                    </form>
+                        <div class="col-6 forgot">
+                            <a href="Registor.html">Registor</a>
+                        </div>
+                </div>
+            </div></center>
+        </div>
+          <!-- The core Firebase JS SDK is always required and must be listed first -->
+          <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+            <!-- Add Firebase products that you want to use -->
+            <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+  
+            <!-- <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script> -->
+          <!-- TODO: Add SDKs for Firebase products that you want to use
+              https://firebase.google.com/docs/web/setup#config-web-app -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script> -->
+        <script> 
+         var firebaseConfig = {
+            apiKey: "AIzaSyCUwx2G-IUhbgYtGfUOUO7EQA_q8Z-lshk",
+            authDomain: "facebook-a1867.firebaseapp.com",
+            databaseURL: "https://facebook-a1867.firebaseio.com",
+            projectId: "facebook-a1867",
+            storageBucket: "facebook-a1867.appspot.com",
+            messagingSenderId: "1071441041285",
+            appId: "1:1071441041285:web:d5c81c79b2409d4e"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+                function signIn(){
+                var email =    document.getElementById('emailLogin').value;
+                console.log(email)
+                var password = document.getElementById('passwordLogin').value;
+                console.log(password)
+
+                firebase.auth().signInWithEmailAndPassword(email,password).catch(function (error){
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if(errorCode === 'auth/wrong-password'){
+                        alert('Wrong password');
+                       
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error); 
+                    
+                })
+                    alert('LOGIN SUCCESS');
+                    window.location = "Button.html";
+            }
+
+        </script>
+        <br>
+        <footer><p class="text-center">Copyright &copy; MTEC </p></footer>
+        </body>
+</html>

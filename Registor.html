@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+         <head>
+            <title>TEST LOGIN</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/esm/popper-utils.min.js.map"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.css"></script>
+            <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+            <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <script src="https://use.fontawesome.com/releases/v5.8.2/js/all.css"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+            <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+            <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+            <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>  -->
+            <!-- <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script> -->
+          
+            <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script> -->
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <title>Firebase html</title>
+        </head>
+        <body>
+        <div class="">
+            <center><div class="col-sm-8 main-section">
+                    <div class="model-content">
+            <form action='#'  class="col-6" onsubmit="sendData()">
+                    <label for='firstname' ></label>
+                    <div class="form-group">
+                    <input type="text"        class="form-control" placeholder="firstname" id='firstname' />
+                    </div>
+                    <label for='lastname'></label>
+                    <div class="form-group">
+                    <input input type="text"  class="form-control" placeholder="lastname" ' id='lastname' />
+                    </div>
+                    <label for='email'></label>
+                    <div class="form-group">
+                    <input type="email"       class="form-control" placeholder="email"      id='email' />
+                    </div>
+                    <label for='password'></label>
+                    <div class="form-group">
+                    <input type='password'    class="form-control" placeholder="password"   id='password' />
+                    </div>
+                    <label for='repeatPassword'></label>
+                    <div class="form-group">
+                    <input type='password'    class="form-control" placeholder="repeatPassword" ' id='repeatPassword' />
+                    </div>   
+                <button input type="submit" value='submit'  class="btn btn-success"><i class="fas fa-sign-in-alt"></i> confirm </button> 
+            <div class="col-6 forgot"><br>
+            <button class="btn btn-success"><i class="fas fa-sign-in-alt"></i><a href="Login.html">BACK</a></button>
+            <!-- <input type="button" value="Click Me" style="float: right;"> -->
+                </div>
+                </div>
+             </div></center>
+            </div>
+        </form>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+          <!-- Add Firebase products that you want to use -->
+          <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+          <!-- <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script> -->
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#config-web-app -->
+            <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script> -->
+        <script>
+        // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCaaCqgdgQJqRVj04u9HA8obciTr6-QpNs",
+                authDomain: "mtectest-46fb7.firebaseapp.com",
+                databaseURL: "https://mtectest-46fb7.firebaseio.com",
+                projectId: "mtectest-46fb7",
+                storageBucket: "mtectest-46fb7.appspot.com",
+                messagingSenderId: "833325436647",
+                appId: "1:833325436647:web:fec7da7a8a22326f"
+            };
+  // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+            function getInputData() {
+                var encrypted      =  CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+                var password       =  CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+                var repeatPassword =  CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+                const fname      =    document.getElementById('firstname').value;
+                console.log(fname)
+                const lname      =    document.getElementById('lastname').value;
+                console.log(lname)
+                const email      =    document.getElementById('email').value;
+                console.log(email)
+                password         =    document.getElementById('password').innerHTML;
+                console.log(password)
+                repeatPassword   =    document.getElementById('repeatPassword').innerHTML;
+                console.log(repeatPassword)
+                return {fname,lname,email,password,repeatPassword}
+            }
+
+            function sendData() {
+                const database = firebase.database();
+                const data     = getInputData();
+                database.ref('users/').push(data);
+                console.log("Success Full")
+                signUp();
+            }
+
+            function signUp(){
+                var email    = document.getElementById('email').value;
+                // console.log(email);
+                var password = document.getElementById('password').value;
+                
+                // console.log(password);
+                firebase.auth().createUserWithEmailAndPassword(email,password).catch(function (error){
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if(errorCode === 'auth/weak-password'){
+                        alert('The password is too weak');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                      
+                });
+            }
+
+            function signIn(){
+                var email =    document.getElementById('emailLogin').value;
+                console.log(email);
+                var password = document.getElementById('passwordLogin').value;
+                console.log(password);
+                firebase.auth().signInWithEmailAndPassword(email,password).catch(function (error){
+                    console.log(firebase.auth());
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if(errorCode === 'auth/wrong-password'){
+                        alert('Wrong password');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                })
+                    alert('logged in');
+
+                    
+            }
+
+            
+            
+        </script>
+        
+    </body>
+</html>

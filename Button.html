@@ -1,0 +1,145 @@
+
+<html>
+    <head>
+      <title>Firebase Authentication</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+    </head>
+    
+    <body>
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">MTEC</span>
+          
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Menu</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="add.html" id="add-data">Add Data</a>
+          <a class="mdl-navigation__link" href="Login.html" id="sign-out">Logout</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="page-content" style="padding-top: 60px;" align="center">
+        <!-- Your content goes here -->
+  
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:40%;" id="ex-table">
+          <thead>
+            <!-- <tr>
+              <th class="mdl-data-table__cell--non-numeric"> Day  </th>
+              <th>Even</th>
+              <th>Time</th>
+              <th>Image</th>
+              <th>Edit</th>
+            </tr> -->
+            
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+            <button type="button"  class="btn btn-success"  id="TEST1" onclick="sendData()"><a href="test.html">TEST</a></button>
+            <button type="button"  class="btn btn-success"  id="TEST2" ><a href="http://192.168.4.1/">Wifi Meneger</a></button>
+           
+        </div>
+      </main>
+    </div>
+      <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+      <!-- Add Firebase products that you want to use -->
+      <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+      <script>
+          //  <button type="button"  class="btn btn-success"  id="TEST1"><a href="Showfirebase.html" >TEST EVEN</a></button>
+              
+        function sendData() {
+                    // var date = new Date(); 
+                    // console.log(date)
+
+                  // var sessionsRef = firebase.database().ref("Time");
+                  // sessionsRef.push({
+                  // startedAt: firebase.database.ServerValue.TIMESTAMP
+                  
+              // });
+                  // const fname    = document.getElementById('TEST1').value;
+                  var date = new Date(); 
+                  const database = firebase.database();
+                  database.ref('event/read ').push("TURE_READ");
+                  alert("READ")
+                  console.log("Success Full")
+
+              //  var now = new Date(Date.now())
+              //   var options = { year: 'numeric', month: 'long', day: 'numeric' };
+              // var now = new Date(Date.now())
+              // var options = { year: 'numeric', month: 'long', day: 'numeric' };
+              // console.log(now.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit'}));
+              
+             
+
+
+              // let today = new Date();
+              // console.log(today);
+
+              // var now = new Date(Date.now())
+              // var options = { year: 'numeric', month: 'long', day: 'numeric' };
+              // console.log(now.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit'}));
+
+
+
+                  // var sessionsRef = new Firebase('sessions/');
+                  // var mySessionRef = sessionsRef.push();
+                  // mySessionRef.onDisconnect().update({ endedAt: Firebase.ServerValue.TIMESTAMP });
+                  // mySessionRef.update({ startedAt: Firebase.ServerValue.TIMESTAMP });
+                  // signUp();
+              }
+      </script>   
+      <!--Include firebase.js  -->
+      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <script>
+      var txt_title,txt_content,txt_img ='';
+      var firebaseConfig = {
+                apiKey: "AIzaSyCaaCqgdgQJqRVj04u9HA8obciTr6-QpNs",
+                authDomain: "mtectest-46fb7.firebaseapp.com",
+                databaseURL: "https://mtectest-46fb7.firebaseio.com",
+                projectId: "mtectest-46fb7",
+                storageBucket: "mtectest-46fb7.appspot.com",
+                messagingSenderId: "833325436647",
+                appId: "1:833325436647:web:fec7da7a8a22326f"
+            };
+  // Initialize Firebase
+       firebase.initializeApp(firebaseConfig); //เรียกใช้งาน
+
+      var database = firebase.database();
+
+      database.ref("object/").once('child_added', function(snapshot){ //ดึงมาใล้งาน
+            if(snapshot.exists()){
+                var content = '';
+                snapshot.forEach(function(data){
+                    var val = data.val();
+                    console.log("row",data.val());
+                    console.log("title",data.getKey());
+                    // console.log(data.getKey())
+                    content +='<tr>';
+                    content += '<td>' + data.val() + '</td>'; //หลัก datacode 
+                    content += '<td>' + data.getKey() + '</td>'; // หลัก Day
+                    content += '<td>' + data.val() + '</td>'; // หลัก Contants
+                    content += '<td><a href="'+val.thumbnail+'" target="_blank"> Click for Preview</a></td>';
+                    content += '<td><a href="edit.html?id='+data.getKey()+'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Edit</a></td>';
+                    content += '</tr>';
+                    
+                });
+                var theDiv = document.getElementById("ex-table");
+                theDiv.innerHTML += content; 
+                //$('#ex-table').append(content);
+            }
+      });
+      </script>
+ </body>
+</html>
